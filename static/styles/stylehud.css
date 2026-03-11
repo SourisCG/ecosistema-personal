@@ -3,7 +3,7 @@ body{
     margin: 0;
 }
 nav{
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    background-color: rgba(255, 255, 255, 0.05);
     display: flex;
     position: sticky;
     justify-content: space-between;
@@ -44,4 +44,34 @@ nav{
 }
 .img-github img:hover{
     transform: scale(1.1);
+}
+.social-grid{
+    perspective: 1500px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+.card{
+    border: solid 5px black;
+    transform-style: preserve-3d;
+}
+.card.github{
+    grid-column: span 6;
+    transform: rotateY(60deg);
+}
+.card.youtube{
+    grid-column: span 3;
+}
+.card.tiktok{
+    grid-column: span 3;
+}
+.card.instagram{
+    grid-column: span 2;
+}
+.card.twitter{
+    grid-column: span 2;
+}
+.card.linkedin{
+    grid-column: span 2;
 }
