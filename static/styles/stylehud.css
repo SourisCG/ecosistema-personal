@@ -1,0 +1,13 @@
+nav{
+    display: flex;
+    position: sticky;
+    justify-content: space-between;
+}
+.options-topbar{
+    justify-content: left;
+}
+.img-github{
+    justify-content: right;
+    overflow: hidden;
+    border-radius: 50%;
+}
