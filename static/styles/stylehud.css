@@ -49,16 +49,22 @@ nav{
     perspective: 1500px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 20px;
-    padding: 20px;
+    gap: 3vh;
+    padding: 5vh 10vw;
+    grid-auto-rows: 20vh;
 }
 .card{
-    border: solid 5px black;
+    border: solid 5px #bc13fe;
     transform-style: preserve-3d;
+    position: relative;
+    --size: 100%;
+    width: var(--size);
+    height: var(--size);
+    background-color: rgba(188, 19, 254, 0.1);
+    aspect-ratio: 1 / 1;
 }
 .card.github{
     grid-column: span 6;
-    transform: rotateY(60deg);
 }
 .card.youtube{
     grid-column: span 3;
@@ -74,4 +80,24 @@ nav{
 }
 .card.linkedin{
     grid-column: span 2;
+}
+.top{
+    position: absolute;
+    transform: rotateX(90deg) translateZ(calc(var(--size) / 2));
+}
+.left{
+    position: absolute;
+    transform: rotateY(-90deg) translateZ(calc(var(--size) / 2));
+}
+.bottom{
+    position: absolute;
+    transform: rotateX(-90deg) translateZ(calc(var(--size) / 2));
+}
+.right{
+    position: absolute;
+    transform: rotateY(90deg) translateZ(calc(var(--size) / 2));
+}
+.front{
+    position: absolute;
+    transform: translateZ(calc(var(--size) / 2))
 }
