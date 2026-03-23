@@ -53,7 +53,7 @@ nav{
     transform: scale(1.1);
 }
 .social-grid{
-    --row-size: 18vh;
+    --row-size: 16.5vh;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 6vh;
@@ -81,7 +81,7 @@ nav{
 }
 
 .card:has(.front:hover){
-    box-shadow: 0 0 16px rgba(0, 195, 255, 0.22);
+    box-shadow: none;
 }
 
 .cube{
@@ -95,8 +95,27 @@ nav{
     pointer-events: auto;
 }
 
+.cube::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: 0.2rem;
+    box-shadow: none;
+    opacity: 0;
+    transition: box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
 .card:has(.front:hover) .cube{
     transform: translateX(var(--cube-align-x)) translateZ(calc(var(--depth) / -2)) rotateX(9deg) rotateY(-14deg);
+}
+
+.card:has(.front:hover) .cube::after{
+    box-shadow:
+        0 0 18px rgba(0, 195, 255, 0.42),
+        0 0 38px rgba(188, 19, 254, 0.28),
+        inset 0 0 12px rgba(0, 195, 255, 0.22);
+    opacity: 1;
 }
 .card.github{
     grid-column: span 6;
@@ -153,6 +172,7 @@ nav{
     outline: 1px solid transparent;
     background-clip: padding-box;
     -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
     background: linear-gradient(145deg, rgba(188, 19, 254, 0.2), rgba(9, 16, 24, 0.76));
     border: solid 3px #bc13fe;
     box-shadow: inset 0 0 12px rgba(188, 19, 254, 0.22), 0 0 10px rgba(0, 195, 255, 0.1);
@@ -207,9 +227,10 @@ nav{
     backface-visibility: visible;
     -webkit-backface-visibility: visible;
     filter: none;
-    border: 0;
-    box-shadow: none;
-    background: linear-gradient(180deg, rgba(8, 14, 20, 0.95), rgba(18, 28, 40, 0.75));
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    opacity: 0 !important;
 }
 .cube .right{
     top: 0;
@@ -258,4 +279,240 @@ nav{
     line-height: 1.35;
     color: rgba(223, 242, 255, 0.92);
     font-size: clamp(0.75rem, 1.35vh, 0.98rem);
+}
+
+.card.github .content-plane article{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(8px, 1vw, 16px);
+}
+
+.card.github .github-copy{
+    flex: 0 0 30%;
+    max-width: 30%;
+}
+
+.card.github .github-copy p{
+    margin-top: 0.55vh;
+}
+
+.card.github .calendar{
+    flex: 0 0 68%;
+    max-width: 68%;
+    margin-left: auto;
+    min-width: 0;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.card.github .calendar svg{
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    display: block;
+    transform-origin: top left;
+    transform: none !important;
+}
+
+.card.github .calendar .sr-only,
+.card.github .calendar .float-left,
+.card.github .calendar .f4,
+.card.github .calendar .contrib-number,
+.card.github .calendar h2{
+    display: none !important;
+}
+
+@media (max-width: 1280px){
+    .card.github .github-copy{
+        flex: 0 0 26%;
+        max-width: 26%;
+    }
+
+    .card.github .calendar{
+        flex: 0 0 72%;
+        max-width: 72%;
+    }
+
+    .card.github .github-copy p{
+        font-size: clamp(0.66rem, 1.05vh, 0.82rem);
+        line-height: 1.2;
+    }
+}
+
+@media (max-width: 980px){
+    .card.github{
+        --row-size: 22vh;
+    }
+
+    .card.github .content-plane article{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        align-items: start;
+        gap: 0.45vh;
+    }
+
+    .card.github .github-copy{
+        flex: none;
+        max-width: 100%;
+    }
+
+    .card.github .github-copy p{
+        display: block;
+        margin-top: 0.35vh;
+        font-size: clamp(0.62rem, 1.1vh, 0.78rem);
+        line-height: 1.2;
+    }
+
+    .card.github .calendar{
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        min-height: 0;
+        margin-left: 0;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 768px){
+    .social-grid{
+        --row-size: 20vh;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.6vh;
+        padding: 1.6vh 4vw 3vh;
+        height: auto;
+        min-height: calc(100vh - 40px);
+        overflow-y: auto;
+        align-content: start;
+    }
+
+    .card.github,
+    .card.youtube,
+    .card.tiktok{
+        grid-column: span 2;
+    }
+
+    .card.instagram,
+    .card.twitter,
+    .card.linkedin{
+        grid-column: span 1;
+    }
+
+    .card.github .content-plane article{
+        padding: 0.7vh 0.5vw;
+        gap: 0.32vh;
+    }
+
+    .card.github .github-copy h2{
+        font-size: clamp(0.82rem, 1.7vh, 1rem);
+    }
+
+    .card.github .calendar{
+        max-height: none;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 560px){
+    .social-grid{
+        --row-size: 24vh;
+        grid-template-columns: 1fr;
+        gap: 2.1vh;
+        padding: 1.2vh 4vw 3vh;
+    }
+
+    .card.github,
+    .card.youtube,
+    .card.tiktok,
+    .card.instagram,
+    .card.twitter,
+    .card.linkedin{
+        grid-column: span 1;
+    }
+
+    .card.github{
+        --row-size: 24vh;
+    }
+
+    .card.github .content-plane article{
+        padding: 0.55vh 0.4vw;
+    }
+
+    .card.github .calendar{
+        max-height: none;
+    }
+}
+
+/* GitHub card responsive fix (final override) */
+.card.github .content-plane article{
+    display: grid !important;
+    grid-template-columns: minmax(145px, 32%) minmax(0, 1fr) !important;
+    align-items: start !important;
+    gap: clamp(8px, 1vw, 14px) !important;
+}
+
+.card.github .github-copy{
+    max-width: 100% !important;
+}
+
+.card.github .github-copy p{
+    margin-top: 0.45vh !important;
+    line-height: 1.18 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card.github .calendar{
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    overflow: hidden !important;
+    margin-left: 0 !important;
+    display: block !important;
+}
+
+.card.github .gh-heatmap{
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+@media (max-width: 980px){
+    .card.github{
+        --row-size: 24vh !important;
+    }
+
+    .card.github .content-plane article{
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto auto !important;
+        gap: 0.4vh !important;
+    }
+
+    .card.github .github-copy p{
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        font-size: clamp(0.6rem, 1.05vh, 0.76rem) !important;
+    }
+}
+
+@media (max-width: 560px){
+    .card.github{
+        --row-size: 26vh !important;
+    }
+
+    .card.github .content-plane article{
+        padding: 0.55vh 0.45vw !important;
+    }
 }
